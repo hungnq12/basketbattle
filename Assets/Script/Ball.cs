@@ -8,6 +8,13 @@ public class Ball : MonoBehaviour
     public Rigidbody ball;
 
     public LineRenderer line;
+
+    public Collider goal;
+
+    public Transform leftHand;
+    public Transform rightHand;
+    public Transform character;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +24,9 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        leftHand.position = transform.position;
+        rightHand.position = transform.position;
+        character.position = transform.position;
     }
 
     private void OnMouseDown()
@@ -31,7 +40,7 @@ public class Ball : MonoBehaviour
         //tempPos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
         tempPos = new Vector3(tempPos.x, tempPos.y, transform.position.z);
 ;       line.positionCount = 1;
-        line.SetPosition(0, transform.position);
+        line.SetPosition(0, ball.position);
         line.positionCount = 2;
         line.SetPosition(1, tempPos);
     }
@@ -41,5 +50,9 @@ public class Ball : MonoBehaviour
         endPos = Input.mousePosition;
         direction = startPos - endPos;
         ball.AddForce(direction * -20);
+    }
+    private void OnTriggerEnter(Collider goal)
+    {
+        Debug.Log("Hit");
     }
 }

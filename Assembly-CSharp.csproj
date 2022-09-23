@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Ball.cs" />
     <Compile Include="Assets\Script\Camera.cs" />
+    <Compile Include="Assets\Script\Boy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

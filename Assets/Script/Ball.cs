@@ -18,25 +18,31 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         leftHand.position = transform.position;
         rightHand.position = transform.position;
         character.position = transform.position;
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     private void OnMouseDown()
     {
         startPos = Input.mousePosition;
+        ball.constraints = RigidbodyConstraints.FreezePosition;
     }
     private void OnMouseDrag()
     {
+        leftHand.position = transform.position;
+        rightHand.position = transform.position;
+        character.position = transform.position;
         line.enabled = true;
         tempPos = Input.mousePosition;
+
+        ball.constraints = RigidbodyConstraints.None;
         //tempPos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
         tempPos = new Vector3(tempPos.x, tempPos.y, transform.position.z);
 ;       line.positionCount = 1;
@@ -48,6 +54,7 @@ public class Ball : MonoBehaviour
     {
         line.enabled = false;
         endPos = Input.mousePosition;
+        ball.constraints = RigidbodyConstraints.FreezePositionZ;
         direction = startPos - endPos;
         ball.AddForce(direction * -20);
     }
